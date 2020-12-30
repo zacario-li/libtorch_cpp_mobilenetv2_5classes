@@ -1,9 +1,10 @@
 # requirments  
-download libtorch (https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip)  
+download libtorch (https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.7.1.zip)  
 unzip libtorch, then put them under c++ dir  
-install cuda9.2  
+install cuda10.2  
 install cudnn7  
-opencv build with -D_GLIBCXX_USE_CXX11_ABI=0 (**important**)  
+if you use 'Pre-cxx11 ABI', do the actions below:
+  opencv build with -D_GLIBCXX_USE_CXX11_ABI=0 (**important**)  
 # How to use
 mkdir build  
 cd build  
