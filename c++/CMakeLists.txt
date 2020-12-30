@@ -10,4 +10,4 @@ find_package(OpenCV REQUIRED)
 
 add_executable(example-app src/model_load.cpp inc/common.h src/utils.cpp)
 target_link_libraries(example-app ${OpenCV_LIBS} ${TORCH_LIBRARIES})
-set_property(TARGET example-app PROPERTY CXX_STANDARD 11)
+set_property(TARGET example-app PROPERTY CXX_STANDARD 14)

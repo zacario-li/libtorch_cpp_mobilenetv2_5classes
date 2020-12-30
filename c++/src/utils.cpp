@@ -22,7 +22,8 @@ void readMatImg(const char* filename, std::vector<cv::Mat>& image, int inputsize
 void prepareImgTensor(std::vector<torch::Tensor>& img_tensor, std::vector<cv::Mat>& img_t, int index)
 {
     //创建cpu类型的tensor,并把mat的data部分赋值进去
-	auto temp_tensor = torch::CPU(torch::kFloat32).tensorFromBlob(img_t[index].data,{1,224,224,3});
+	//auto temp_tensor = torch::CPU(torch::kFloat32).tensorFromBlob(img_t[index].data,{1,224,224,3});
+	auto temp_tensor = torch::from_blob(img_t[index].data, {1,224,224,3});
 
 	//上述步骤，tensor的排列是{1,224,224,3}，是batch,w,h,channel
 	//我们要重新排列成{1,3,224,224}，即batch,channel,w,h

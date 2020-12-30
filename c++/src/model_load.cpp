@@ -17,6 +17,7 @@ int main(int argc, const char* argv[]) {
 
   if(is_gpu)
   {
+    std::cout<<"gpu"<<std::endl;
 	  device_type = torch::kCUDA;
   }else
   {
@@ -26,9 +27,7 @@ int main(int argc, const char* argv[]) {
   
   // Deserialize the ScriptModule from a file using torch::jit::load().
   //反序列化pytorch模型，并加载到module变量
-  std::shared_ptr<torch::jit::script::Module> module = torch::jit::load(argv[1],auto_device);
-
-  assert(module != nullptr);
+  torch::jit::script::Module module = torch::jit::load(argv[1],auto_device);
   
   //start to do inference
   //prepare inputs date var
@@ -72,7 +71,7 @@ int main(int argc, const char* argv[]) {
 
   std::cout<<"start..."<<std::endl;
   //开始调用模型进行inference，并获取结果out_tensor
-  torch::Tensor out_tensor = module->forward(inputs).toTensor();
+  torch::Tensor out_tensor = module.forward(inputs).toTensor();
   //std::cout<<"end..."<<"out tensor size:"<<out_tensor.sizes()<<std::endl;
   //由于此前我们用pytorch导出模型的时候，最后一层模型的输出是log_softmax，所以我们这里要转一下，变成softmax
   out_tensor = torch::softmax(out_tensor,1);
